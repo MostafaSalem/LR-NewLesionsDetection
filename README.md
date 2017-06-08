@@ -88,6 +88,18 @@ This tool applies a subtraction operation between the PD-w, T2-w and T2-FLAIR-w 
 
 To adapt that tool check the file check the file __submain.cpp__ and make the necessary adjustments.
 
+# Voxel Selection
+The name of the tool that implements this step is VoxelSelectionTool. The syntax for this tool is as follows: 
+```bash
+VoxelSelectionTool followup_folder 
+```
+
+This tool applies a voxel selectoin operation to select candidate voxels for training.Before training the model, we performed a voxel selection step in where candidate voxels that
+are likely to be part of a new lesion were selected to decrease the number of training samples. As new lesions appear hyperintense in T2-w subtraction images, we only trained the logistic regression model with those candidate voxels. Some regions may have a high intensity in the subtraction images as a result of noise, inhomogeneity, registration errors, or
+small anatomic differences. To avoid that, the T2-w subtraction images were smoothed with a Gaussian kernel and only voxels with a subtraction value larger than the mean were included as candidates.
+
+To adapt that tool check the file check the file __voxelselectoinmain.cpp__ and make the necessary adjustments.
+
 # Demons registration and deformation analysis
 
 The name of the tool that implements this step is DeformableTool. The syntax for this tool is as follows:
